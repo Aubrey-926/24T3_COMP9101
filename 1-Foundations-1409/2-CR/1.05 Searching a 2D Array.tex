@@ -1,0 +1,66 @@
+\documentclass[12pt]{article}
+\usepackage{algos-tasks}
+
+\begin{document}
+\task[regular]{Searching a 2D Array}
+
+\begin{question}
+In this question, a 2D array is said to be \emph{sorted} if each row and each column is strictly increasing. The following is an example of a sorted 2D array.
+\[\begin{bmatrix}
+    2 & 3 & 6 & 8 \\
+    4 & 5 & 7 & 10 \\
+    6 & 8 & 9 & 13 \\
+    9 & 11 & 12 & 15
+\end{bmatrix}\]
+
+We want to design an $O(n)$ algorithm that determines whether a given value $x$ is in a sorted 2D array $A$ with $n$ rows and columns. The $O(n)$ algorithm must apply to any sorted 2D array and \textbf{not} the above example sorted 2D array only.
+
+\begin{enumerate}
+    \item Suppose we have looked at the top right entry of the array, $A[1][n]$. If $A[1][n] < x$, which parts of the array is it possible for $x$ to appear in? Which parts is it \textit{impossible} for $x$ to appear in? Justify your answer.
+    \item After this test, what are the dimensions of the remaining search range?
+
+    \item We define an \emph{invariant} as a property of a mathematical object (i.e. an array) that remains unchanged after certain operations. Given (a) and (b), what \emph{invariant} can be maintained each time we compare $x$ with some entry $A[i][j]$ given that we eliminate the parts of $A$ where $x$ cannot be? 
+
+    \textbf{Hint:} In (a), we considered the case where $A[1][n] < x$. You should also consider the cases where $A[1][n] > x$ and $A[1][n] = x$. In each case, what can we say about where $x$ could be in the array?
+    
+    \item Hence, design an $O(n)$ algorithm that determines whether $x$ appear in a sorted array $A$.
+
+    Using your invariant, justify that your algorithm correctly decides whether or not $x$ is in the array. Start with an outline of your proof structure, and then write your justification. Your algorithm needs to answer `yes' \textit{if and only if} the value $x$ appears in $A$ - this should inform the structure of your justification. You should refer to Tutorial Sheet 1 or the justification examples document in the task resources for some ideas on how to approach your proof.
+
+    Justify that your algorithm runs in $O(n)$ time.
+
+\end{enumerate}
+\end{question}
+\newpage
+\begin{rubric}
+\begin{enumerate}
+    \item Describe the part of the array that could contain $x$ if $A[1][n] < x$.
+        
+    Explain why this is the case.
+    
+    A diagram is optional.
+    
+    Expected length: two or three sentences.
+    \item Identify the dimensions of the remaining array after one comparison, by applying the method of part (a).
+    
+    Expected length: one sentence.
+    \item  Describe an invariant about the remaining search range and the target value $x$.
+    
+    Expected length: one sentence.
+    \item Describe an algorithm that determines whether $A$ contains $x$.
+    
+    Your algorithm must be written in English, not code or pseudocode, and not transcribed from code or pseudocode.
+    
+    Justify that your algorithm produces the correct answer.
+    
+    Justify that your algorithm runs in $O(n)$ time.
+\end{enumerate}
+\end{rubric}
+
+\begin{solution}
+\end{solution}
+
+\begin{attribution}
+\end{attribution}
+
+\end{document}

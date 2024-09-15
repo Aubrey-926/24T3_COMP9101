@@ -1,0 +1,66 @@
+\documentclass[12pt]{article}
+\usepackage{algos-tasks}
+
+\begin{document}
+\task[regular]{Diameter of a Tree II}
+
+\begin{question}
+Recall from Diameter of a Tree I:
+\begin{quote}
+    Let $T = (V,E)$ be an unweighted tree (an undirected, connected, acyclic graph) with $n$ vertices. For two vertices $u,v \in V$, the \textit{distance} between $u$ and $v$ (denoted $d(u,v)$) is the length of the shortest path (by number of edges) between $u$ and $v$. The {\em diameter} $D$ of $T$ is the greatest distance between any two vertices in $T$. That is,
+\[ D = \max_{u,v\in V} d(u,v). \]
+
+We distinguish between {\em the} diameter and {\em a} diameter; the former is defined as above, and the latter is a path in $T$ with length $D$.
+\end{quote}
+Recall also from Diameter of a Tree I that the following algorithm also correctly finds {\em the} diameter of a tree:
+    \begin{quote}
+        Select an arbitrary vertex $r \in V$. 
+        
+        Run a BFS from $r$ and find the furthest vertex from $r$, denote this vertex $x$. 
+        
+        Run a BFS from $x$ and find the furthest vertex from $x$, denote this vertex $y$. 
+        
+        $x \rightarrow y$ is {\em a} diameter of the tree, with length $d(x,y)$.
+    \end{quote} 
+
+In this task, we will rigorously prove that this algorithm is correct. To do this, we will assume that there is some diameter $a \to b$ in $T$, and we aim to show that for any choice of $x$ that is among the furthest vertices of $r$, and any choice of $y$ among the furthest vertices from $x$, we must have that $d(x,y) = d(a,b)$.
+
+\begin{enumerate}[label=(\alph*)]
+    \item Show that if $x = a$, then $d(x,y) = d(a,b)$.
+
+    \item Show that if $x \neq a$, and $r$ lies on the path from $a$ to $b$, then $d(x,y) = d(a,b)$.
+    
+    {\textbf{Hint:}} $T$ is acyclic, which implies the path from $x \to r$ cannot intersect with both the path from $r \to a$ and $r \to b$.
+    
+    \item Show that if $x \neq a$, and $r$ does not lie on the path from $a$ to $b$, then $d(x,y) = d(a,b)$.
+    
+     {\textbf{Hint:}} Consider a vertex $w$ that lies on the paths from $a \to b$, $r \to a$, and $r \to b$.   
+     
+    \item Hence, conclude that the path $x \to y$ is a diameter.
+\end{enumerate}
+\end{question}
+
+\begin{rubric}
+\begin{enumerate}
+    \item Give a rigorous proof of the required statement.
+    
+    Expected length: A few short sentences.
+    \item Give a rigorous proof of the required statement.
+    
+    Expected length: A paragraph.
+    \item Give a rigorous proof of the required statement.
+    
+    Expected length: A couple of short paragraphs.
+    \item Reach the required conclusion by using the statements proved in the 3 previous parts of the question.
+    
+    Expected length: A few short sentences.
+\end{enumerate}
+\end{rubric}
+
+\begin{solution}
+\end{solution}
+
+\begin{attribution}
+\end{attribution}
+
+\end{document}

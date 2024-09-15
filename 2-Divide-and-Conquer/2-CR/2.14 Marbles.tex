@@ -1,0 +1,58 @@
+\documentclass[12pt]{article}
+\usepackage{algos-tasks}
+
+\begin{document}
+\task[regular]{Marbles}
+
+\begin{question}
+\begin{enumerate}
+    \item \label{a)}Suppose we have two polynomials $P$ and $Q$, where all coefficients are 0 or 1 (for example, $x^6 + x^5 + x^2$). How does the coefficient of some term $x^k$ in the polynomial product $PQ$ relate to the powers of the terms present in $P$ and $Q$?
+    \item Now, let's consider the following problem: 
+
+    \begin{quote}
+    There are two stores in town, one selling packets of blue marbles and the other selling packets of white marbles. The packet sizes offered in the first store are listed in an array $B[1..p]$, whose entries are all distinct positive integers no larger than $n$. Similarly, an array $W[1..q]$ describes the packet sizes offered in the other store.
+    \end{quote}
+    
+    Wasim wishes to buy \emph{exactly one} packet from each store. Help him find: 
+    \begin{itemize}
+        \item all possible values for the total number of marbles he can buy and 
+        \item for each of these values, how many different ways (i.e. different combinations of packets of marble) he can buy to get to that value.
+    \end{itemize}
+
+    For example, suppose the first store sells packets of three, five and eight blue marbles, so $p = 3$ and $B = [3,5,8]$, and likewise suppose $q = 3$ and $W = [1,4,6]$.
+    Then Wasim can get:
+    \begin{itemize}
+        \item 4 marbles in one way (three blue and one white),
+        \item 6 marbles in one way (five blue and one white),
+        \item 7 marbles in one way (three blue and four white),
+        \item 9 marbles in three different ways (three blue and six white, five blue and four white, or eight blue and one white),
+        \item 11 marbles in one way (five blue and six white),
+        \item 12 marbles in one way (eight blue and four white), or
+        \item 14 marbles in one way (eight blue and six white).
+    \end{itemize}
+
+    Using your observations from \ref{a)}, design and analyse an $O(n \log n)$ algorithm to solve the problem. Recall that $n$ is the largest packet size available.
+\end{enumerate}
+\end{question}
+\newpage
+\begin{rubric}
+\begin{enumerate}
+    \item Identify the relationship between the coefficient of $x^k$ in $PQ$ with the powers of the terms in $P$ and $Q$. Explain why this relationship occurs.
+
+    \item Design an algorithm that solves the problem in $O(n \log n)$ time. 
+    
+    Express your algorithm in simple English. Do not write a program, and do not transcribe a program back to written English.
+
+    Justify that your algorithm produces the correct answer. You do not need to repeat any justifications made in part (a) - if the correctness obviously follows from (a), then you can just say so.
+
+    Justify that your algorithm runs in $O(n \log n)$ time.
+\end{enumerate}
+Expected response length: a paragraph for each part.
+\end{rubric}
+
+\begin{solution}
+\end{solution}
+
+\begin{attribution}
+\end{attribution}
+\end{document}

@@ -1,0 +1,162 @@
+\documentclass[12pt]{article}
+\usepackage{algos-tasks}
+
+\begin{document}
+\task[regular]{Line Segment Intersection}
+
+\begin{question}
+You are given a set $H$ of horizontal line segments and a set $V$ of vertical line segments such that $\lvert H \rvert + \lvert V \rvert = n$. Each horizontal line segment is specified by two $x$-coordinates (left and right) and one $y$-coordinate: $\{\ell_i, r_i, y_i\}$ and each vertical line segment is specified by two $y$-coordinates (down and up) and one $x$-coordinate: $\{d_i, u_i, x_i\}$.
+
+{\em In all three subparts, you may assume that all of the $x$ and $y$ coordinates are distinct; in other words, no pair of horizontal lines intersect and no pair of vertical lines intersect.}
+
+\begin{enumerate}[label = (\alph*)]
+    \item Firstly, suppose that each vertical line segment is unbounded from above and below. In other words, each vertical line segment stretches from $-\infty$ to $+\infty$ in its $y$-coordinate.
+
+    Design and analyse an $O(n \log n)$ algorithm to return the number of intersections between line segments in $H$ and {\em lines} in $V$.
+
+    For example, the following diagram illustrates three horizontal line segments and four vertical lines, which give rise to six intersection points.
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{scope}[every path/.style={thick, red, latex-latex}]
+                \draw (0.5, -1.5) -- (0.5, 1.5);
+                \draw (3, -1.5) -- (3, 1.5);
+                \draw (1.5, -1.5) -- (1.5, 1.5);
+                \draw (2, -1.5) -- (2, 1.5);
+            \end{scope}
+
+            \begin{scope}[every node/.style={fill = blue, circle, inner sep = 0pt, minimum size = 4pt}]
+                \node (a) {};
+                \node[right = 2cm of a] (b) {};
+                \node[below right = 1cm of a] (c) {};
+                \node[right = 0.75cm of c] (d) {};
+                \node[above right = 1cm of a] (e) {};
+                \node[right = 1.75cm of e] (f) {};
+            \end{scope}
+
+            \begin{scope}[every path/.style={thick, blue}]
+                \draw (a) -- (b);
+                \draw (c) -- (d);
+                \draw (e) -- (f);
+            \end{scope}
+        \end{tikzpicture}
+    \end{center}
+
+    \textbf{Hint:} sort the $x$-coordinates and sweep from left to right.
+
+    \item Now, suppose that each vertical line is bounded from above. In other words, each vertical line has a top endpoint but each vertical line stretches downwards to $-\infty$. We call these {\em rays}, and each ray can be specified by one $x$-coordinate (up) and one $y$-coordinate $\{u_i, y_i\}$.
+    
+    Design and analyse an $O(n\log^2n)$ algorithm that returns the number of intersections between line segments in $H$ and {\em rays} in $V$.
+
+    \textbf{Note:} the recurrence $T(n) = 2\,T(\frac{n}{2}) \,+ \,O(n \log n)$ has asymptotic solution $T(n) = \Theta(n\log^2n)$; this is an extension of case 2 of the Master Theorem.
+
+    For example, the following diagram illustrates three horizontal line segments and four vertical rays, which give rise to three intersection points.
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{scope}[every node/.style={fill = red, circle, inner sep = 0pt, minimum size = 4pt}]
+                \node at (0.5, 1.5) {};
+                \node at (1.5, -0.25) {};
+                \node at (2, 0.65) {};
+                \node at (3, 1.25) {};
+            \end{scope}
+            
+            \begin{scope}[every path/.style={thick, red, latex-}]
+                \draw (0.5, -1.5) -- (0.5, 1.5);
+                \draw (3, -1.5) -- (3, 1.25);
+                \draw (1.5, -1.5) -- (1.5, -0.25);
+                \draw (2, -1.5) -- (2, 0.65);
+            \end{scope}
+
+            \begin{scope}[every node/.style={fill = blue, circle, inner sep = 0pt, minimum size = 4pt}]
+                \node (a) {};
+                \node[right = 2cm of a] (b) {};
+                \node[below right = 1cm of a] (c) {};
+                \node[right = 0.75cm of c] (d) {};
+                \node[above right = 1cm of a] (e) {};
+                \node[right = 1.75cm of e] (f) {};
+            \end{scope}
+
+            \begin{scope}[every path/.style={thick,blue}]
+                \draw (a) -- (b);
+                \draw (c) -- (d);
+                \draw (e) -- (f);
+            \end{scope}
+        \end{tikzpicture}
+    \end{center}
+
+    \textbf{Hint:} divide the problem into \emph{four} subproblems, each of which either:
+    \begin{itemize}
+        \item contributes no intersection points,
+        \item is equivalent to the problem in (a), or
+        \item is a smaller instance of the problem in (b), which we can solve recursively.
+    \end{itemize}
+
+    \item We now revisit the original problem. Suppose that each vertical ray is bounded from below. In other words, each vertical ray has a top and bottom endpoint. Each of these vertical line segments can be specified by two $y$-coordinates (down and up) and one $x$-coordinate: $\{d_i, u_i, x_i\}$.
+    
+    Design and analyse an $O(n\log^2n)$ algorithm that returns the number of intersections between line segments in $H$ and line segments in $V$.
+
+    For example, the following diagram illustrates three horizontal line segments and four vertical line segments, which give rise to three intersection points.
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{scope}[every node/.style={fill = red, circle, inner sep = 0pt, minimum size = 4pt}]
+                \node at (0.5, -1.5) {};
+                \node at (0.5, 1.5) {};
+                \node at (1.5, -0.25) {};
+                \node at (1.5, -1.25) {};
+                \node at (2, 0.65) {};
+                \node at (2, -0.5) {};
+                \node at (3, 1.25) {};
+                \node at (3, 0) {};
+            \end{scope}
+
+            \begin{scope}[every path/.style={thick, red}]
+                \draw (0.5, -1.5) -- (0.5, 1.5);
+                \draw (3, 0) -- (3, 1.25);
+                \draw (1.5, -1.25) -- (1.5, -0.25);
+                \draw (2, -0.5) -- (2, 0.65);
+            \end{scope}
+
+            \begin{scope}[every node/.style={fill = blue, circle, inner sep = 0pt, minimum size = 4pt}]
+                \node (a) {};
+                \node[right = 2cm of a] (b) {};
+                \node[below right = 1cm of a] (c) {};
+                \node[right = 0.75cm of c] (d) {};
+                \node[above right = 1cm of a] (e) {};
+                \node[right = 1.75cm of e] (f) {};
+            \end{scope}
+
+            \begin{scope}[every path/.style={thick, blue}]
+                \draw (a) -- (b);
+                \draw (c) -- (d);
+                \draw (e) -- (f);
+            \end{scope}
+        \end{tikzpicture}
+    \end{center}
+
+    \textbf{Hint:} run the algorithm from (b) twice in a smart way.
+
+    \item \textbf{(optional challenge)} Can you solve the same problem in $O(n\log n)$ time?
+
+    \textbf{Hint:} start by reducing the complexity of part (b) to $O(n \log n)$ using precomputation.
+\end{enumerate}
+\end{question}
+
+\begin{rubric}
+\begin{itemize}
+    \item Your solution should clearly outline which subpart you're answering, especially if you are doing any of the optional parts.
+
+    \item You can refer to the solution of previous parts, whether you did them or not.
+
+    \item You should argue the correctness of the algorithm and its time complexity.
+
+    \item Course materials such as lectures and tutorials don't require attribution, but making explicit reference to similar ideas is still helpful to show your understanding.
+\end{itemize}
+
+Expected length: around two pages.
+\end{rubric}
+
+\begin{solution}
+\end{solution}
+
+\begin{attribution}
+\end{attribution}
+\end{document}

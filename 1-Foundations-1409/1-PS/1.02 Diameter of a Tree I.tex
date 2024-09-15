@@ -1,0 +1,96 @@
+\documentclass[12pt]{article}
+\usepackage{algos-tasks}
+\begin{document}
+\task[regular]{Diameter of a Tree I}
+
+\begin{question}
+Let $T = (V,E)$ be an unweighted tree (an undirected, connected, acyclic graph) with $n$ vertices. For two vertices $u,v \in V$, the \textit{distance} between $u$ and $v$ (denoted $d(u,v)$) is the length of the shortest path (by number of edges) between $u$ and $v$. The {\em diameter} $D$ of $T$ is the greatest distance between any two vertices in $T$. That is,
+\[ D = \max_{u,v\in V} d(u,v). \]
+
+We distinguish between {\em the} diameter and {\em a} diameter; the former is defined as above, and the latter is a path in $T$ with length $D$.
+
+For example, in the tree shown below, $u \rightarrow v$ is {\em a} diameter of length 5. The vertices labelled $u$ and $v$ have a distance of 5, and no pair of vertices have a greater distance. Therefore, {\em the} diameter of $T$ is $D = 5.$
+\begin{center}
+\begin{tikzpicture}[every node/.style={draw, circle, minimum size=0.7cm}]
+    \node (a) at (6, 5) {};
+    \node (b) at (5, 7) {};
+    \node (c) at (2, 6) {};
+    \node (d) at (0, 7) {$u$};
+    \node (e) at (7, 8) {};
+    \node (f) at (3, 4) {};
+    \node (g) at (7, 3) {};
+    \node (h) at (10, 5) {$v$};
+    \node (i) at (8, 6) {};
+    \node (j) at (10, 8) {};
+    \node (k) at (3, 8) {};
+
+    \draw
+        (a) edge (b)
+            edge (f)
+            edge (g)
+            edge (e)
+            edge (i)
+        (b) edge (c)
+            edge (k)
+        (c) edge (d)
+        (i) edge (h)
+            edge (j)
+    ;
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}[label=(\alph*)]
+    \item Design an approach to find {\em the} diameter of a tree $T$ in $O(nm)$ time, where $n$ is the number of nodes and $m$ is the number of edges.
+    \item The following algorithm also correctly finds {\em the} diameter of a tree:
+    \begin{quote}
+        Select an arbitrary vertex $r \in V$. 
+        
+        Run a BFS from $r$ and find the furthest vertex from $r$, denote this vertex $x$. 
+        
+        Run a BFS from $x$ and find the furthest vertex from $x$, denote this vertex $y$. 
+        
+        $x \rightarrow y$ is {\em a} diameter of the tree, with length $d(x,y)$.
+    \end{quote} 
+    Analyse the time complexity of this algorithm.
+\end{enumerate}
+
+Now consider this similar problem. Let $G = (V,E)$ be an unweighted, undirected, connected graph with $n$ vertices and $m$ edges. For two vertices $u,v \in V$, the \textit{distance} between $u$ and $v$ (denoted $d(u,v)$) is the length of the shortest path (by number of edges) between $u$ and $v$. Again, the {\em diameter} $D$ of $G$ is the greatest distance between any two vertices in $G$. That is,
+\[ D = \max_{u,v\in V} d(u,v). \]
+
+We distinguish between {\em the} diameter, and {\em a} diameter; the former is defined as above, and the latter is a path in $G$ with length $D$.
+
+\begin{enumerate}[label=(\alph*)]
+    \setcounter{enumi}{2}
+    \item We now want to find {\em the} diameter of a graph $G$. Does the algorithm you suggested in part (a) also work on this problem?
+    \item Does the algorithm in part (b) also work on this problem?
+\end{enumerate}
+
+\end{question}
+
+\begin{rubric}
+\begin{enumerate}
+    \item  Give a short but clear description of the algorithm.
+        
+    Analyse the time complexity, and explain why it runs in $O(nm)$ time.
+    
+    Expected length: A short paragraph.
+    \item 
+    Analyse the time complexity of the algorithm.
+    
+    Expected length: A few short sentences.
+    \item If you claim it does work, explain why. Otherwise, give a counterexample.
+    
+    Expected length: A short paragraph.
+    \item If you claim it does work, explain why. Otherwise, give a counterexample.
+    
+    Expected length: A short paragraph.
+\end{enumerate}
+\end{rubric}
+
+\begin{solution}
+\end{solution}
+
+\begin{attribution}
+\end{attribution}
+
+\end{document}

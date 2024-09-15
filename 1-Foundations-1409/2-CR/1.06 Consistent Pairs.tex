@@ -1,0 +1,62 @@
+\documentclass[12pt]{article}
+\usepackage{algos-tasks}
+
+\begin{document}
+
+\task[regular]{Consistent Pairs}
+
+\begin{question}
+    We have an array \(A\) of \(n\) positive integers (not necessarily sorted). A pair of indices \(i,j\) where \(i < j\) is said to be \emph{consistent} if \(A[j] - A[i] = j - i\), i.e. the (signed) difference in values is equal to the (signed) difference in indices. We want to compute the number of consistent pairs in \(A\).
+
+    \textbf{Example:} Given the array \(A = [3, 8, 5, 9, 11]\), the consistent pairs are \(\{(1, 3), (2, 5)\},\) since we have that \(A[3]-A[1]=5-3=2=3-1, \) and \(A[5]-A[2]=11-8=3=5-2\).
+    
+    It's not at all obvious how we should start; so we first solve a simpler problem, and show that we can solve our original problem by reducing to said simpler problem. Generally, this is emblematic of a lot of problem-solving; using known techniques to solve unfamiliar problems.
+    
+\begin{enumerate}[label=(\alph*)]
+    \item Now suppose instead we have a sorted array \(B\) of \(n\) integers. A pair of indices \((i,j)\) (where $i < j$) is called a \emph{matching pair} if \(B[i] = B[j]\).
+
+    Design an algorithm which runs in \(\Theta(n)\) time and counts the number of matching pairs in array \(B\).
+
+    \textbf{Hint:} In a sorted array, equal values appear only in consecutive indices.
+
+    \textbf{Hint:} If there are \(k \geq 3\) consecutive equal values, how many matching pairs does that give us? 
+
+    \textbf{Example:} Given the array \(B = [3, 3, 5, 5]\), the matching pairs are \(\{(1, 2), (3, 4)\},\) since we have that \(B[1]=B[2]=3, \) and \(B[3] = B[4] = 5\).
+    
+    \item How would you count the number of matching pairs in an \emph{unsorted} array? What is the time complexity of your approach?
+
+    \textbf{Hint:} Try not to write an entirely new algorithm. What's different about our input in this instance; how might we try and use our algorithm from part (a)?
+
+    \item Now, we return to our original problem, where we have our array \(A\) of \(n\) positive integers (not necessarily sorted), and we want to compute the number of consistent pairs in \(A\).
+
+    Design and analyse an efficient algorithm (strictly faster than brute force) that solves this problem.
+
+    \textbf{Hint:} Construct an array \(B\) so that consistent pairs in array \(A\) correspond to matching pairs in array \(B\), that is, \(A[j] - A[i] = j - i\) whenever \(B[i] = B[j]\).
+
+    \textbf{Hint:} Does rearranging the equation above relate at all to our definition of \emph{matching pairs}?
+
+    
+    \end{enumerate}
+\end{question}
+
+\begin{rubric}
+\begin{itemize}
+    \item Your response to part (a) should describe the steps followed to execute the algorithm in simple English. Do not write a program, and do not transcribe a program back to written English.
+
+    You \textbf{must} justify the correctness of your algorithm, namely that it reports the correct number of matching pairs.
+    
+    You \textbf{must} justify that your algorithm runs in \(\Theta(n)\) time.
+
+    \item In parts (b) and (c), an outline of the method and a statement of the time complexity is sufficient. You do not need to restate any reasoning used in previous parts.
+
+    \item If you use the hint in part (c), you must describe how to assign values to array \(B\) in terms of the values in array \(A\), and show that a matching pair in \(B\) is consistent in \(A\) \emph{and vice versa}. If the second direction of the proof is essentially identical to the first, it is enough to just mention this fact.
+\end{itemize}
+Expected response length: less than half a page.
+\end{rubric}
+
+\begin{solution}
+\end{solution}
+\begin{attribution}
+    
+\end{attribution}
+\end{document}

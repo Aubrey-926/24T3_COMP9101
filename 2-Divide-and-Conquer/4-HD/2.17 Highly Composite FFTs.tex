@@ -1,0 +1,81 @@
+\documentclass[12pt]{article}
+\usepackage{algos-tasks}
+
+\begin{document}
+\task[regular, veryhard, extension]{Highly Composite FFTs}
+
+\begin{question}
+In lectures, we presented the FFT algorithm to find the DFT of a polynomial restricted to the case where $n$ is a power of 2. While the DFT is presented purely as a tool for performing convolutions in this course, there are many practical applications where the DFT itself is of interest. In some of these applications, we may not have control over the length of the DFT that we wish to use; therefore we may not be able to choose a ``nice'' value for $n$, such as an exact power of 2. In this task, we explore extending the method from lectures to polynomials of different lengths.
+
+Consider a coefficient sequence $A = \langle a_0, a_1, \dots, a_{n-1} \rangle$ with length $n = r^m$ for some integer radix $r$ and integer exponent $m$. We denote the DFT sequence of $A$ as $\hat{A} = \langle P_A(1), P_A(\omega_n), \dots, P_A(\omega_n^{n-1}) \rangle$. In the lecture, we presented a recursive approach to compute the DFT of $A$ when $r = 2$, by dividing $A$ into the two subsequences
+\[ A^{[0]} = \langle a^{[0]}_0, a^{[0]}_1, \dots, a^{[0]}_{n/2-1} \rangle = \langle a_0, a_2, \dots, a_{n-2} \rangle \] 
+\[A^{[1]} = \langle a^{[1]}_0, a^{[1]}_1, \dots, a^{[1]}_{n/2-1} \rangle = \langle a_1, a_3, \dots, a_{n-1} \rangle \]
+and showing that
+\[ P_A(\omega_n^k) = P_A^{[0]}(\omega^k_{n/2}) + \omega^k_n P_A^{[1]}(\omega^k_{n/2}). \]
+
+This approach is commonly known as the radix-2 FFT. We will begin by deriving a similar relationship for $r = 3$.
+
+\begin{enumerate}
+    \item Suppose that $n = 3^m$ for some integer $m$. Show that there exist three subsequences $A^{[0]}, A^{[1]}, A^{[2]}$, each of length $n/3$, such that 
+    \[ P_A(x) = P_{A^{[0]}}(x^3) + xP_{A^{[1]}}(x^3) + x^2P_{A^{[2]}}(x^3) \] Hence or otherwise, show that
+    \[ P_A(\omega_n^k) = P_A^{[0]}(\omega^k_{n/3}) + \omega^k_n P_A^{[1]}(\omega^k_{n/3}) + \omega^{2k}_n P_A^{[2]}(\omega^k_{n/3})\]
+    
+    \item Explain how the above relationship can be used to derive a divide and conquer algorithm to compute the DFT of a polynomial with length precisely equal to a power of 3. What would the time complexity of this approach be?
+
+    {\textbf{Hint:}} You can keep your explanation brief by referencing the FFT algorithm from lectures.  
+    
+    \item Now suppose that $n = r^m$ for some integers $r$, $m$. Use $r$ subsequences each of length $n/r$ to derive similar expressions to those given in part (a).
+    
+    Hence or otherwise, analyse the time complexity as a function of $n$ and $r$, when $n$ is a power of $r$. What does this analysis tell us about the run-time of a radix-$r$ FFT as $r$ grows?
+    
+    {\textbf{Hint:}} Come up with an appropriate recurrence and manually unroll it down to a base case.
+    
+    \item When $n$ itself is a prime number, it is only possible to divide with a factor of $r = n$. Does performing this division offer any speed-up over the brute force DFT in this circumstance?
+    
+    \item Finally, let's consider the case where $n$ can be any integer. Recall the fundamental theorem of arithmetic: every integer greater than $1$ can be uniquely decomposed into a product of prime factors. That is, we can write $n = p_1^{m_1}p_2^{m_2}\dots p_l ^{m_l}$ (where the primes are in ascending order). Using this fact, can you suggest a divide-and-conquer based strategy to perform an FFT for any integer length $n$? Comment on the efficiency of this approach in terms of the size of size of $p_l$.
+    
+    \item Suppose we have two polynomials $A$ and $B$ with lengths $n_1 = 1137$ and $n_2 = 877$ respectively, and we wish to compute the convolution of these polynomials. Recall from the lectures that to compute the convolution of two polynomials with lengths $n_1$ and $n_2$ respectively, we first zero pad them both to length $n_1+n_2-1$ (the size of the resulting convolution). Is it efficient to use the FFT algorithm we have outlined in (e) here? Can you suggest another approach that might be faster?
+    
+    {\textbf{Hint:}} The product polynomial will have length $n = 2047 = 23\times 89$. If we only care about the convolution, does the length of the FFT have to be the same as the length of the product polynomial?
+\end{enumerate}
+
+\rule{\textwidth}{0.25pt}
+
+\textbf{Additional notes (for the extra keen):} There are many different FFT algorithms with the same asymptotic complexity. The practical run-time differences on these algorithms tends to vary based on the physical constraints of the machine you wish to use them on. For example, it can be shown that a radix-4 FFT requires fewer integer multiplications than a radix-2 FFT, so when the length is a power of 4 this can reduce the run-time on a machine that is bottle-necked primarily by multiplication time. However it also costs slightly more overhead and requires slightly more complicated code. An even further optimisation is an approach called the \href{https://en.wikipedia.org/wiki/Split-radix_FFT_algorithm}{Split-radix} FFT.
+
+There also exist $O(n\log n)$ algorithms to deal with prime-length base cases, \href{https://en.wikipedia.org/wiki/Rader%27s_FFT_algorithm}{Rader's FFT} and \href{https://en.wikipedia.org/wiki/Chirp_Z-transform#Bluestein.27s_algorithm}{Bluestein's Algorithm}. The FFTW (Fastest Fourier Transform in the West) library actually uses a combination of methods and decides on the fly what to do based on the length specified. The run-time is still significantly faster when the input size only contains relatively small prime factors.
+\end{question}
+
+\begin{rubric}
+
+\begin{enumerate}
+    \item Explicitly define an appropriate $A^{[0]}, A^{[1]}$, and $A^{[2]}$ in terms of the elements of $A$.
+    
+    Then, mathematically derive the given expression.
+    \item Give a short description of a divide and conquer strategy that computes the DFT of $A$. Provide a recurrence that describes the time complexity and solve it with the Master Theorem or otherwise.
+    \item Explicitly define appropriate subsequences, and then derive an expression equivalent to the one given in part (a).
+    
+    Then, give an explicit asymptotic time complexity as a function of $n$ and $r$ by defining a recurrence and unrolling it manually.
+    \item Decide whether there is any speed up obtained through your divide and conquer algorithm when $r = n$. Justify your answer by referring to part (c).
+    \item Describe a divide-and-conquer based strategy for the case where $n$ can be any integer, by building upon the approach from the previous parts of the question. Explain how the run-time is impacted by the value of $p_l$.
+    \item \label{zero-pad} Discuss the efficiency of your approach from (e) here. Briefly describe a faster way to compute the desired convolution.
+\end{enumerate}
+
+Expected response length:
+\begin{enumerate}
+    \item An explicit definition for each sequence, followed by several lines of mathematical working.
+    \item A paragraph.
+    \item A few mathematical expressions and some lines of working, followed by a short paragraph of justification along with a few lines of mathematical working.
+    \item A few sentences.
+    \item A paragraph.
+    \item A short paragraph.
+\end{enumerate}
+\end{rubric}
+
+\begin{solution}
+\end{solution}
+
+\begin{attribution}
+\end{attribution}
+
+\end{document}

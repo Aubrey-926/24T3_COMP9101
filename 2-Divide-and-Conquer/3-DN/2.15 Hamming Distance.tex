@@ -1,0 +1,38 @@
+\documentclass[12pt]{article}
+\usepackage{algos-tasks}
+
+\DeclareMathOperator{\HamDist}{\mathsf{HammingDist}}
+\DeclareMathOperator{\BothZero}{\mathsf{BothZero}}
+\DeclareMathOperator{\BothOne}{\mathsf{BothOne}}
+
+\begin{document}
+\task[regular]{Hamming Distance}
+
+\begin{question}
+For two arrays $A$ and $B$ of $n$ binary integers, the {\em Hamming distance} of $A$ and $B$ is the number of indices where $A$ and $B$ disagree. For example, if $A = [1, 1, 0, 1]$ and $B = [0, 1, 1, 1]$, then the Hamming distance of $A$ and $B$ is 2 since $A$ and $B$ disagree at indices 1 and 3.
+
+Let $P[1..m]$ be an array of $m$ binary integers and $T[1..n]$ an array of $n$ binary integers, where $m \leq n$. Design and analyse an $O(n \log n)$ algorithm to return the minimum Hamming distance between $P$ and a subarray of $T$ of length $m$.
+
+For example, consider the following pattern array $P = [1, 1, 0, 1, 0]$ and the corresponding text array $T = [\textcolor{black!30}{0, 0, } \textcolor{red!80}{\underline{1, 1, 0, 0, 0}}\textcolor{black!30}{, 1, 0}]$: the minimum Hamming distance is 1 with the subarray highlighted.
+
+{\bfseries Hint.} {\em For a subarray $S$ of length $m$, the Hamming distance is given by} \[\HamDist(S) = m - \BothOne(S) - \BothZero(S),\] where the last two terms indicate the number of places where subarray $S$ and the pattern are both one or both zero respectively.
+\end{question}
+
+\begin{rubric}
+    \begin{itemize}
+    \item Your response should describe the steps followed to execute the algorithm in simple English. Do not write a program, and do not transcribe a program back to written English.
+    
+    You \textbf{must} justify the correctness of your algorithm.
+    
+    You \textbf{must} justify that your algorithm runs in time complexity that you claim.
+\end{itemize}
+Expected response length: about one page.
+\end{rubric}
+
+\begin{solution}
+\end{solution}
+
+\begin{attribution}
+\end{attribution}
+
+\end{document}

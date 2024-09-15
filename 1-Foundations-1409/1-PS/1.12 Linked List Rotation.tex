@@ -1,0 +1,41 @@
+\documentclass[12pt]{article}
+\usepackage{algos-tasks}
+
+\begin{document}
+\task[regular]{Linked List Rotation}
+
+\begin{question}
+Rotating a list right means moving each element along one place, with the previous last value becoming the new head. For example, if we rotate $[1, 2, 3, 4]$ right, we would get $[4, 1, 2, 3]$.
+
+We can represent a non-empty linked list as a pair of 2 things: a value (the `head'), and a smaller list containing all the values that come after the head (the `tail'). So the list $[1, 2, 3, 4]$ is the pair $(h, T)$, where $h = 1$ and $T$ is the list $(2, (3, (4))$. This is similar to a typical linked list in a programming language like C, where $h$ is equivalent to \verb|node.value| and $T$ is equivalent to \verb|node.next|.
+
+This algorithm rotates a linked list $L = (h, T)$ right, where $h$ is the first value and $T$ is the remainder of the list.
+\begin{quote}
+    If $L$ or $T$ is the empty list, then just return $L$.
+    
+    Otherwise, recursively rotate $T$, the result of which we denote $(h', T')$. Note that $T'$ may be empty.
+    
+    Output $(h', (h, T'))$.
+\end{quote}
+
+For example, to rotate $L = (1, (2, (3, (4))))$  (with $h=1$), we would start by recursively rotating $T = (2, (3, (4)))$. Rotating $T$ produces $(4, (2, (3)))$, which gives $h' = 4$ and $T' = (2, (3))$, so we output the rotation of $L$ as $(4, (1, (2, (3))))$.
+
+By using induction on the size of the list, show that this algorithm correctly rotates a linked list right.
+
+\textbf{Hint:} Where was $h'$ before rotating $T$?
+\end{question}
+
+\begin{rubric}
+
+Show by induction that the rotation algorithm is correct.
+
+Expected length: 2 or 3 short paragraphs.
+\end{rubric}
+
+\begin{solution}
+\end{solution}
+
+\begin{attribution}
+\end{attribution}
+
+\end{document}

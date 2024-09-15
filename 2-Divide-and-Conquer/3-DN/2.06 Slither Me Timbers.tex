@@ -1,0 +1,129 @@
+\documentclass[12pt]{article}
+\usepackage{algos-tasks}
+
+\begin{document}
+\task[regular]{Slither Me Timbers}
+\begin{question}
+You are planning to navigate the Little Blue Gum Forest in Australia’s Blue Mountains National Park to find a new species of Wollemi Pine. A Blue Mountains local resident gave you a very special map of the Little Blue Gum Forest that contains $n$ points. You're told a new species of Wollemi Pine grows at one of the $n$ points. To thoroughly explore each point, you decide to recruit $n$ explorers, so that each explorer searches a distinct point. 
+
+The map is also subdivided into regions. Each region is defined by the set of points that enclose it. For example, the map below has 7 points and is subdivided into 3 regions. The lines defining regions do not overlap.
+
+\begin{center}
+        \begin{tikzpicture}[scale=0.75]
+        \node[draw, circle, minimum size=0.1,fill=black] (1)  at (0, 0);
+        \node[draw, circle, minimum size=0.1,fill=black] (2)  at (-1.5, 1.5);
+        \node[draw, circle, minimum size=0.1,fill=black] (3)  at (0, 1.5);
+        \node[draw, circle, minimum size=0.1,fill=black] (4)  at (1.5, 0);
+        \node[draw, circle, minimum size=0.1,fill=black] (5)  at (-2.25, 0);  
+        \node[draw, circle, minimum size=0.1,fill=black] (6)  at (-2.25, -1.5);
+        \node[draw, circle, minimum size=0.1,fill=black] (9)  at (-4.5, 0);
+
+        \draw[-][thick]
+        (1) edge node {} (2)
+        (2) edge node {} (3)
+        (3) edge node {} (4)
+        (4) edge node {} (1)
+        (2) edge node {} (5)
+        (5) edge node {} (6)
+        (6) edge node {} (4)
+        (2) edge node {} (9)
+        (6) edge node {} (9)
+        
+    \end{tikzpicture}
+\end{center}
+
+You realise that if any explorers became lost, it would be too slow to use one map to determine each explorer's region. Therefore, you decide to partition the map into \textbf{slabs} by drawing vertical lines through each of the map's $n$ points. The map above has 4 slabs defined by the \textcolor{red}{red} vertical lines, as shown below.
+
+
+\begin{center} 
+        \begin{tikzpicture}[scale=0.75]
+        \draw[red] (-4.5,2.0)  -- (-4.5,-2.0);
+        \draw[red] (-2.25,2.0) -- (-2.25,-2.0);
+        \draw[red] (-1.5,2.0)  -- (-1.5,-2.0);
+        \draw[red] (0,2.0)     -- (0,-2.0);
+        \draw[red] (1.5,2.0)   -- (1.5,-2.0);
+        
+        \node[draw, circle, minimum size=0.1,fill=black] (1)  at (0, 0);
+        \node[draw, circle, minimum size=0.1,fill=black] (2)  at (-1.5, 1.5);
+        \node[draw, circle, minimum size=0.1,fill=black] (3)  at (0, 1.5);
+        \node[draw, circle, minimum size=0.1,fill=black] (4)  at (1.5, 0);
+        \node[draw, circle, minimum size=0.1,fill=black] (5)  at (-2.25, 0);  
+        \node[draw, circle, minimum size=0.1,fill=black] (6)  at (-2.25, -1.5);
+        \node[draw, circle, minimum size=0.1,fill=black] (9)  at (-4.5, 0);
+      
+        \draw[-][thick]
+        (1) edge node {} (2)
+        (2) edge node {} (3)
+        (3) edge node {} (4)
+        (4) edge node {} (1)
+        (2) edge node {} (5)
+        (5) edge node {} (6)
+        (6) edge node {} (4)
+        (2) edge node {} (9)
+        (6) edge node {} (9)
+
+    \end{tikzpicture}
+\end{center}
+
+
+The $i$th \textbf{slab} is bound horizontally by the $x$-coordinate of the $i$th and $(i+1)$th vertical line, denoted $s_i$ and $s_{i+1}$ respectively. The slab is also defined by the set of edges that intersect with the vertical lines that bound the $i$th slab. We can thus define the $i$th slab by $S_i = \{s_i, {(l_1,r_1), (l_2, r_2), ...}\}$ where $l_j$ and $r_j$ are the edge \textbf{intersection points} with the left and right vertical lines respectively and $l_j \leq l_{j+1}$ and $r_j \leq r_{j+1}$ (that is, the set of intersecting edges is sorted by its components). For example, the shaded slab below has 3 intersecting edges. Since the edges of a slab are between the points where the region lines intersect the side of the slab, the lowest edge in this slab is between the two crosses, not between the two points at the end of the line.
+
+\begin{center}
+        \begin{tikzpicture}[scale=0.75]
+        \fill[blue!10] (-1.5, 2.0) rectangle (0, -2.0)
+
+        \draw[red] (-4.5,2.0)  -- (-4.5,-2.0);
+        \draw[red] (-2.25,2.0) -- (-2.25,-2.0);
+        \draw[red] (-1.5,2.0)  -- (-1.5,-2.0);
+        \draw[red] (0,2.0)     -- (0,-2.0);
+        \draw[red] (1.5,2.0)   -- (1.5,-2.0);
+        
+        \node[draw, circle, minimum size=0.1,fill=black] (1)  at (0, 0);
+        \node[draw, circle, minimum size=0.1,fill=black] (2)  at (-1.5, 1.5);
+        \node[draw, circle, minimum size=0.1,fill=black] (3)  at (0, 1.5);
+        \node[draw, circle, minimum size=0.1,fill=black] (4)  at (1.5, 0);
+        \node[draw, circle, minimum size=0.1,fill=black] (5)  at (-2.25, 0);  
+        \node[draw, circle, minimum size=0.1,fill=black] (6)  at (-2.25, -1.5);
+        \node[draw, circle, minimum size=0.1,fill=black] (9)  at (-4.5, 0);
+
+        
+        \node at (-1.5, -1.2) {$\times$};
+        \node at (0, -0.6) {$\times$};
+
+      
+        \draw[-][thick]
+        (1) edge node {} (2)
+        (2) edge node {} (3)
+        (3) edge node {} (4)
+        (4) edge node {} (1)
+        (2) edge node {} (5)
+        (5) edge node {} (6)
+        (6) edge node {} (4)
+        (2) edge node {} (9)
+        (6) edge node {} (9)
+
+    \end{tikzpicture}
+\end{center}
+
+For each slab, you decide to label each of the edges with the name of the region that is immediately above the edge. Therefore, given a slab's latitudinal coordinate $s_i$ and a slab edge $(l_j, r_j)$, you can determine the region above the edge.
+
+The local has warned you a very vivacious eastern brown snake called \emph{Slither me timbers} inhabits a few of the forest’s regions, and they advise you to avoid those regions lest you encounter the snake. After setting off on your expedition, you encounter torrential rain, hail, and cyclonic winds that scatter all of the explorers across the Little Blue Gum Forest! You realise that you need to act fast to determine whether any explorer is close to \emph{Slither me timbers}. Via satellite phone, each explorer sends you their location. The $i$th explorer is located at $p_i = (x_i, y_i)$.
+
+Thus, given a set of slabs $M = \{S_1, S_2,...\}$ and a set of explorer locations $P = \{p_1, ..., p_n\}$, design an $O(n\log{n})$ algorithm that determines which region each explorer is in. 
+
+\end{question}
+\begin{rubric}
+\begin{itemize}
+    \item Design and describe an $O(n\log{n})$ algorithm that solves the problem by finding the region each of the explorers are located in. 
+    \item Justify the algorithm correctly determines each of the explorer's region. Outline a strategy for how you will establish the algorithm's correctness, then provide the algorithm's correctness justification.
+    \item Justify the algorithm's time complexity.
+\end{itemize}
+Expected length: about one page.
+\end{rubric}
+
+\begin{solution} 
+\end{solution}
+
+\begin{attribution}
+\end{attribution}
+\end{document}
